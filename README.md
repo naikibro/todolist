@@ -1,6 +1,28 @@
 # NFA 022 - TODO list application
 
-This is a TODO list application made with React native and RNpapers
+This is a simple TODO list application made in React native
+
+## Tech stack
+
+- React native
+- react native papers
+- flutter ( for templating )
+- node js
+- expo
+
+## How to run this app
+
+```sh
+git clone https://github.com/naikibro/todolist.git
+```
+
+```sh
+npm i
+```
+
+```sh
+npx expo start
+```
 
 ## TODO
 

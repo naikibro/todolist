@@ -53,7 +53,6 @@ export default function App() {
     count++;
     createTask(newTask);
     setText("");
-
     toggleDrawer();
     console.log(newTask);
   };
