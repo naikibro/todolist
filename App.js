@@ -11,7 +11,7 @@ import { TextInput, Drawer, Button as PaperButton } from "react-native-paper";
 import Button from "./components/Button";
 
 export default function App() {
-  let count = 3; // Start count at the highest existing ID
+  const [count, setCount] = useState(3);
   const [text, setText] = useState("");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -26,7 +26,12 @@ export default function App() {
 
   const readTasks = () => {
     return tasks.map((task) => (
-      <Task key={task.id} task={task} onToggleTask={handleToggleTask} />
+      <Task
+        key={task.id}
+        task={task}
+        onToggleTask={handleToggleTask}
+        onSwipeLeft={() => deleteTask(task.id)}
+      />
     ));
   };
 
@@ -50,7 +55,7 @@ export default function App() {
 
   const handleInput = (textInput) => {
     let newTask = { title: textInput, id: count, isDone: false };
-    count++;
+    setCount(count + 1);
     createTask(newTask);
     setText("");
     toggleDrawer();
