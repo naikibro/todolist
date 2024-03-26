@@ -16,8 +16,8 @@ export default function App() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const [tasks, setTasks] = useState([
-    { title: "Faire un café", id: 1, isDone: false },
-    { title: "Faire les courses", id: 2, isDone: false },
+    { title: "Faire un café ☕", id: 1, isDone: false },
+    { title: "Boire de l'eau 🍺", id: 2, isDone: false },
   ]);
 
   const createTask = (newTask) => {
