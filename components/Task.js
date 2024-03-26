@@ -1,17 +1,38 @@
 import * as React from "react";
-import { Text, StyleSheet, View, PanResponder } from "react-native";
-import { Avatar, Button, Card, Checkbox } from "react-native-paper";
+import {
+  StyleSheet,
+  View,
+  PanResponder,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
+import { Card, Checkbox } from "react-native-paper";
 
-const Task = ({ task, onToggleTask, onSwipeLeft }) => {
+const Task = ({ task, onSwipeLeft }) => {
   const [checked, setChecked] = React.useState(task.isDone);
+  const [editing, setEditing] = React.useState(false);
+  const [title, setTitle] = React.useState(task.title);
 
   const handleToggle = () => {
+    task.isDone = !checked;
     setChecked(!checked);
-    onToggleTask(task.id, !checked);
   };
 
   const handleLeftSwipe = () => {
     onSwipeLeft(task.id);
+  };
+
+  const handleUpdate = () => {
+    setEditing(true);
+  };
+
+  const handleTitleChange = (text) => {
+    setTitle(text);
+  };
+
+  const handleTitleSubmit = () => {
+    task.title = title;
+    setEditing(false);
   };
 
   // Create the PanResponder unconditionally
@@ -36,20 +57,34 @@ const Task = ({ task, onToggleTask, onSwipeLeft }) => {
           },
         ]}
       >
-        <Card.Actions style={styles.actions}>
-          <Card.Title
-            title={task.title}
-            subtitle={task.completion}
-            titleStyle={[
-              styles.title,
-              { color: checked ? "white" : "black" }, // Toggle text color
-            ]}
+        {editing ? (
+          <TextInput
+            style={styles.editInput}
+            value={title}
+            onChangeText={handleTitleChange}
+            onSubmitEditing={handleTitleSubmit}
+            onBlur={handleTitleSubmit}
+            autoFocus
           />
-          <Checkbox
-            status={checked ? "checked" : "unchecked"}
-            onPress={handleToggle}
-          />
-        </Card.Actions>
+        ) : (
+          <TouchableOpacity onPress={handleUpdate}>
+            <Card.Actions style={styles.actions}>
+              <Card.Title
+                title={task.title}
+                subtitle={task.completion}
+                titleStyle={[
+                  styles.title,
+                  { color: checked ? "white" : "black" },
+                ]}
+              />
+
+              <Checkbox
+                onPressIn={handleToggle}
+                status={checked ? "checked" : "unchecked"}
+              />
+            </Card.Actions>
+          </TouchableOpacity>
+        )}
       </Card>
     </View>
   );
@@ -75,6 +110,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: "bold",
+  },
+  editInput: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    fontSize: 16,
   },
 });
 
