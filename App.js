@@ -26,31 +26,12 @@ export default function App() {
 
   const readTasks = () => {
     return tasks.map((task) => (
-      <Task
-        key={task.id}
-        task={task}
-        onToggleTask={handleToggleTask}
-        onSwipeLeft={() => deleteTask(task.id)}
-      />
+      <Task key={task.id} task={task} onSwipeLeft={() => deleteTask(task.id)} />
     ));
-  };
-
-  const handleToggleTask = (taskId, isDone) => {
-    const updatedTasks = tasks.map((task) =>
-      task.id === taskId ? { ...task, isDone: isDone } : task
-    );
-    setTasks(updatedTasks);
-    console.log(
-      `Task ${taskId} status changed to ${isDone ? "done" : "not done"}`
-    );
   };
 
   const deleteTask = (taskId) => {
     setTasks(tasks.filter((task) => task.id !== taskId));
-  };
-
-  const findTaskById = (taskId) => {
-    return tasks.find((task) => task.id === taskId);
   };
 
   const handleInput = (textInput) => {

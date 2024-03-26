@@ -1,16 +1,23 @@
 import * as React from "react";
-import { Text, StyleSheet, View, PanResponder, TextInput } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  View,
+  PanResponder,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import { Button, Card, Checkbox } from "react-native-paper";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const Task = ({ task, onToggleTask, onSwipeLeft }) => {
+const Task = ({ task, onSwipeLeft }) => {
   const [checked, setChecked] = React.useState(task.isDone);
   const [editing, setEditing] = React.useState(false);
   const [title, setTitle] = React.useState(task.title);
 
   const handleToggle = () => {
+    task.isDone = !checked;
     setChecked(!checked);
-    onToggleTask(task.id, !checked);
   };
 
   const handleLeftSwipe = () => {
@@ -72,8 +79,8 @@ const Task = ({ task, onToggleTask, onSwipeLeft }) => {
               ]}
             />
             <Checkbox
+              onPressIn={handleToggle}
               status={checked ? "checked" : "unchecked"}
-              onPress={handleToggle}
             />
           </Card.Actions>
         )}
