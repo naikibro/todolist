@@ -25,7 +25,7 @@ npx expo start
 ## How to use
 
 1. Add a task: click the bottom drawer
-2. Edit a task : click the edit button next to a task
-3. Delete a task : swipe the task to the left
+2. Edit a task : click the task
+3. Delete a task : swipe the task to the left ( if completed )
 4. Mark a task as completed : toggle the checkbox
 5. Mark a task as incomplete : toggle the checkbox
