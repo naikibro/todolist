@@ -7,8 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { Button, Card, Checkbox } from "react-native-paper";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { Card, Checkbox } from "react-native-paper";
 
 const Task = ({ task, onSwipeLeft }) => {
   const [checked, setChecked] = React.useState(task.isDone);
@@ -69,32 +68,25 @@ const Task = ({ task, onSwipeLeft }) => {
             autoFocus
           />
         ) : (
-          <Card.Actions style={styles.actions}>
-            <Card.Title
-              title={task.title}
-              subtitle={task.completion}
-              titleStyle={[
-                styles.title,
-                { color: checked ? "white" : "black" },
-              ]}
-            />
-            <Checkbox
-              onPressIn={handleToggle}
-              status={checked ? "checked" : "unchecked"}
-            />
-          </Card.Actions>
+          <TouchableOpacity onPress={handleUpdate}>
+            <Card.Actions style={styles.actions}>
+              <Card.Title
+                title={task.title}
+                subtitle={task.completion}
+                titleStyle={[
+                  styles.title,
+                  { color: checked ? "white" : "black" },
+                ]}
+              />
+
+              <Checkbox
+                onPressIn={handleToggle}
+                status={checked ? "checked" : "unchecked"}
+              />
+            </Card.Actions>
+          </TouchableOpacity>
         )}
       </Card>
-      <View style={{ marginRight: 10 }}>
-        <Button
-          mode="outlined"
-          buttonColor="white"
-          textColor="black"
-          onPress={handleUpdate}
-        >
-          <Ionicons name="pencil-outline" size={22} color="black" />
-        </Button>
-      </View>
     </View>
   );
 };
